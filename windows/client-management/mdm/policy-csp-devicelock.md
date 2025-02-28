@@ -36,6 +36,20 @@ ms.topic: generated-reference
 <!-- AccountLockoutPolicy-Description-Begin -->
 <!-- Description-Source-DDF -->
 Account lockout threshold - This security setting determines the number of failed logon attempts that causes a user account to be locked out. A locked-out account can't be used until it's reset by an administrator or until the lockout duration for the account has expired. You can set a value between 0 and 999 failed logon attempts. If you set the value to 0, the account will never be locked out. Failed password attempts against workstations or member servers that have been locked using either CTRL+ALT+DELETE or password-protected screen savers count as failed logon attempts. Default: 0 Account lockout duration - This security setting determines the number of minutes a locked-out account remains locked out before automatically becoming unlocked. The available range is from 0 minutes through 99,999 minutes. If you set the account lockout duration to 0, the account will be locked out until an administrator explicitly unlocks it. If an account lockout threshold is defined, the account lockout duration must be greater than or equal to the reset time. Default: None, because this policy setting only has meaning when an Account lockout threshold is specified. Reset account lockout counter after - This security setting determines the number of minutes that must elapse after a failed logon attempt before the failed logon attempt counter is reset to 0 bad logon attempts. The available range is 1 minute to 99,999 minutes. If an account lockout threshold is defined, this reset time must be less than or equal to the Account lockout duration. Default: None, because this policy setting only has meaning when an Account lockout threshold is specified.
+
+To set in Intune, the format is not standard ADMX-backed CSP which calls for XML entered as a string, eg:
+<AccountLockoutPolicy>
+    <AccountLockoutDuration>30</AccountLockoutDuration>
+    <AccountLockoutThreshold>10</AccountLockoutThreshold>
+    <ResetAccountLockoutCounterAfter>20</ResetAccountLockoutCounterAfter>
+</AccountLockoutPolicy>
+
+The working format is:
+AccountLockoutDuration:30, AccountLockoutThreshold:10, ResetAccountLockoutCounterAfter:20
+
+Which is referenced in https://github.com/microsoft/osconfig/blob/main/security/SecurityBaseline_WindowsServer_2025-2409.csv
+
+
 <!-- AccountLockoutPolicy-Description-End -->
 
 <!-- AccountLockoutPolicy-Editable-Begin -->
